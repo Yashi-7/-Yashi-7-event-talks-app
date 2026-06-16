@@ -26,10 +26,15 @@
             </div>
             
             <div class="header-right">
-                <!-- Theme Toggle Button -->
-                <button id="theme-toggle" class="btn-icon" aria-label="Toggle dark/light mode">
-                    <i class="fa-solid fa-moon"></i>
-                </button>
+                <!-- Theme Toggle Switch -->
+                <div class="theme-switch-wrapper">
+                    <i class="fa-solid fa-moon theme-icon-label moon" title="Dark Mode"></i>
+                    <label class="theme-switch" for="checkbox-theme">
+                        <input type="checkbox" id="checkbox-theme" aria-label="Toggle dark/light mode" />
+                        <div class="slider round"></div>
+                    </label>
+                    <i class="fa-solid fa-sun theme-icon-label sun" title="Light Mode"></i>
+                </div>
                 
                 <!-- Refresh Button with spinner -->
                 <button id="refresh-btn" class="btn btn-primary btn-refresh">

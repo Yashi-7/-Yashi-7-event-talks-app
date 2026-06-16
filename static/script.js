@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function initApp() {
     // DOM Element selections
-    const themeToggle = document.getElementById("theme-toggle");
+    const checkboxTheme = document.getElementById("checkbox-theme");
     const refreshBtn = document.getElementById("refresh-btn");
     const searchInput = document.getElementById("search-input");
     const clearSearch = document.getElementById("clear-search");
@@ -25,15 +25,16 @@ function initApp() {
     // Theme Config
     const savedTheme = localStorage.getItem("theme") || "dark";
     document.documentElement.setAttribute("data-theme", savedTheme);
-    updateThemeIcon(savedTheme);
-
-    themeToggle.addEventListener("click", () => {
-        const currentTheme = document.documentElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-        updateThemeIcon(newTheme);
-    });
+    
+    if (checkboxTheme) {
+        checkboxTheme.checked = savedTheme === "light";
+        
+        checkboxTheme.addEventListener("change", (e) => {
+            const newTheme = e.target.checked ? "light" : "dark";
+            document.documentElement.setAttribute("data-theme", newTheme);
+            localStorage.setItem("theme", newTheme);
+        });
+    }
 
     // Refresh Action
     refreshBtn.addEventListener("click", fetchReleaseNotes);
@@ -100,15 +101,6 @@ function initApp() {
     fetchReleaseNotes();
 }
 
-// Update icon on Theme Switch
-function updateThemeIcon(theme) {
-    const themeIcon = document.querySelector("#theme-toggle i");
-    if (theme === "dark") {
-        themeIcon.className = "fa-solid fa-sun";
-    } else {
-        themeIcon.className = "fa-solid fa-moon";
-    }
-}
 
 // Fetch notes via API
 async function fetchReleaseNotes() {
